@@ -103,10 +103,10 @@ static Triple<std::vector<cv::Vec3d>, std::vector<cv::Vec3d>, std::vector<cv::Ma
 
 
 // detectAndLocalize accepts an image as an input and returns a list of ArucoMarker
-+(NSArray *) detectAndLocalize:(CVPixelBufferRef)pixelBuffer
-                withIntrinsics:(NSArray*) intrinsics
-     andDistortionCoefficients:(NSArray*) distortionCoefficients
-                 andMarkerSize:(Float64) markerSize {
++(NSArray *)detectAndLocalize:(CVPixelBufferRef)pixelBuffer
+               withIntrinsics:(NSArray *)intrinsics
+       distortionCoefficients:(NSArray *)distortionCoefficients
+                   markerSize:(Float64) markerSize {
 
     CGFloat width = CVPixelBufferGetWidth(pixelBuffer);
     CGFloat height = CVPixelBufferGetHeight(pixelBuffer);

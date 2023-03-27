@@ -22,13 +22,13 @@ typedef struct Quartet {
 } Quartet;
 
 @interface ArucoMarker : NSObject
-@property (nonatomic) int id;
-@property (nonatomic) SCNVector3 position;
-@property (nonatomic) SCNVector3 orientation;
-@property (nonatomic) Quartet corners;
-@property (nonatomic) int imageWidth;
-@property (nonatomic) int imageHeight;
-@property (nonatomic) Quartet imageVectors;
+@property(nonatomic) int id;
+@property(nonatomic) SCNVector3 position;
+@property(nonatomic) SCNVector3 orientation;
+@property(nonatomic) Quartet corners;
+@property(nonatomic) int imageWidth;
+@property(nonatomic) int imageHeight;
+@property(nonatomic) Quartet imageVectors;
 @end
 
 @interface OpenCVWrapper : NSObject
@@ -38,13 +38,13 @@ typedef struct Quartet {
 // - camera intrinsics (in form of a matrix of floats),
 // - distortion coefficients (in form of an array of floats)
 // - and marker size as an input and returns a list of ArucoMarker
-+(NSArray *) detectAndLocalize:(CVPixelBufferRef)pixelBuffer
-                withIntrinsics:(NSArray*) intrinsics
-     andDistortionCoefficients:(NSArray*) distortionCoefficients
-                 andMarkerSize:(Float64) markerSize;
++ (NSArray *)detectAndLocalize:(CVPixelBufferRef)pixelBuffer
+                withIntrinsics:(NSArray *)intrinsics
+        distortionCoefficients:(NSArray *)distortionCoefficients
+                    markerSize:(Float64)markerSize;
 
 // linkedAndLoaded constantly returns true, used just to be sure, that the file is linked and loaded
-+(BOOL) linkedAndLoaded;
++ (BOOL)linkedAndLoaded;
 
 @end
 

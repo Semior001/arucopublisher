@@ -14,7 +14,6 @@
 		64C4526429D1472D00FB14F8 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6487F4AF29D11E25009A295E /* opencv2.framework */; };
 		C9FFB157A6C70B1D307FA7F2 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFBB8A8C530FC0FDC58087 /* OpenCVWrapper.mm */; };
 		C9FFB513D7D128879D55B301 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C9FFBA5081B63463D762E688 /* .gitignore */; };
-		C9FFB9E56190C1F3699CBE58 /* ArucoMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFB49FB8AF0E2B50FE7CF5 /* ArucoMarker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,7 +27,6 @@
 		6461BBAC29D119A700CF2442 /* arucopublisherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = arucopublisherUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6487F4AF29D11E25009A295E /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = dependencies/opencv2.framework; sourceTree = "<group>"; };
 		C9FFB49D279F34933DF52388 /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
-		C9FFB49FB8AF0E2B50FE7CF5 /* ArucoMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArucoMarker.swift; sourceTree = "<group>"; };
 		C9FFBA5081B63463D762E688 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		C9FFBB8A8C530FC0FDC58087 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
 		C9FFBEA99058A427FE4C707B /* OpenCVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 		C9FFBEA399D10098189815F4 /* aruco */ = {
 			isa = PBXGroup;
 			children = (
-				C9FFB49FB8AF0E2B50FE7CF5 /* ArucoMarker.swift */,
 				C9FFBB8A8C530FC0FDC58087 /* OpenCVWrapper.mm */,
 				C9FFBEA99058A427FE4C707B /* OpenCVWrapper.h */,
 				C9FFB49D279F34933DF52388 /* Bridging.h */,
@@ -197,7 +194,6 @@
 				6461BB9229D119A600CF2442 /* ContentView.swift in Sources */,
 				6461BB9029D119A600CF2442 /* arucopublisherApp.swift in Sources */,
 				C9FFB157A6C70B1D307FA7F2 /* OpenCVWrapper.mm in Sources */,
-				C9FFB9E56190C1F3699CBE58 /* ArucoMarker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,6 +334,7 @@
 					"$(PROJECT_DIR)/dependencies",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to detect ArUco markers.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -375,6 +372,7 @@
 					"$(PROJECT_DIR)/dependencies",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to detect ArUco markers.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
