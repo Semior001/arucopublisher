@@ -7,14 +7,14 @@
 
 import Foundation
 
-@objc public class ArucoMarker: NSObject {
-    @objc var id: Int = 0
-    @objc var pose: FloatTriple
-    @objc var orientation: FloatTriple
-    @objc var corners: Corners? = nil
-    @objc var imageVectors: OrientationVectors?
+@objc class ArucoMarker: NSObject {
+    var id: Int = 0
+    var pose: FloatTriple
+    var orientation: FloatTriple
+    var corners: Corners? = nil
+    var imageVectors: OrientationVectors?
 
-    @objc init(id: Int, pose: FloatTriple, orientation: FloatTriple, corners: Corners?, imageVectors: OrientationVectors?) {
+    init(id: Int, pose: FloatTriple, orientation: FloatTriple, corners: Corners? = nil, imageVectors: OrientationVectors? = nil) {
         self.id = id
         self.pose = pose
         self.orientation = orientation
@@ -26,28 +26,27 @@ import Foundation
 
 
 @objc class FloatTriple: NSObject {
-    @objc var x: Float
-    @objc var y: Float
-    @objc var z: Float
+    var x: Float
+    var y: Float
+    var z: Float
 
-    @objc init(x: Float, y: Float, z: Float) {
+    init(x: Float, y: Float, z: Float) {
         self.x = x
         self.y = y
         self.z = z
         super.init()
     }
-
 }
 
 @objc class Corners: NSObject {
-    @objc var topLeft: FloatTriple
-    @objc var topRight: FloatTriple
-    @objc var bottomRight: FloatTriple
-    @objc var bottomLeft: FloatTriple
-    @objc var imageWidth: Int
-    @objc var imageHeight: Int
+    var topLeft: FloatTriple
+    var topRight: FloatTriple
+    var bottomRight: FloatTriple
+    var bottomLeft: FloatTriple
+    var imageWidth: Int
+    var imageHeight: Int
 
-    @objc init(topLeft: FloatTriple, topRight: FloatTriple, bottomRight: FloatTriple, bottomLeft: FloatTriple, imageWidth: Int, imageHeight: Int) {
+    init(topLeft: FloatTriple, topRight: FloatTriple, bottomRight: FloatTriple, bottomLeft: FloatTriple, imageWidth: Int, imageHeight: Int) {
         self.topLeft = topLeft
         self.topRight = topRight
         self.bottomRight = bottomRight
@@ -59,14 +58,14 @@ import Foundation
 }
 
 @objc class OrientationVectors: NSObject {
-    @objc var base: CGPoint
-    @objc var x: CGPoint
-    @objc var y: CGPoint
-    @objc var z: CGPoint
-    @objc var imageWidth: Int
-    @objc var imageHeight: Int
+    var base: CGPoint
+    var x: CGPoint
+    var y: CGPoint
+    var z: CGPoint
+    var imageWidth: Int
+    var imageHeight: Int
 
-    @objc init(base: CGPoint, x: CGPoint, y: CGPoint, z: CGPoint, imageWidth: Int, imageHeight: Int) {
+    init(base: CGPoint, x: CGPoint, y: CGPoint, z: CGPoint, imageWidth: Int, imageHeight: Int) {
         self.base = base
         self.x = x
         self.y = y

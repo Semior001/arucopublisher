@@ -25,8 +25,8 @@
      andDistortionCoefficients:(NSArray*) distortionCoefficients
                  andMarkerSize:(Float64) markerSize;
 
-// test no-op function just to be sure that the library is working
-+(NSString *) test;
+// linkedAndLoaded constantly returns true, used just to be sure, that the file is linked and loaded
++(BOOL) linkedAndLoaded;
 
 @end
 

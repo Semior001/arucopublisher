@@ -11,12 +11,10 @@
 #define OPENCV_STITCHING_EXPOSURE_COMPENSATE_HPP
 
 #import <opencv2/opencv.hpp>
-#import <opencv2/core.hpp>
 #import <opencv2/imgcodecs/ios.h>
-#import <opencv2/imgproc/imgproc.hpp>
 #include "opencv2/aruco.hpp"
-#include "opencv2/aruco/dictionary.hpp"
 #include "OpenCVWrapper.h"
+#include "Bridging.h"
 
 @implementation OpenCVWrapper
 
@@ -127,12 +125,13 @@ static Triple<std::vector<cv::Vec3d>, std::vector<cv::Vec3d>, std::vector<cv::Ma
             intrinsics, distortionCoefficients, markerSize
     );
 
-    for (int i = 0; i < ids.size(); i++) {}
+    for (int i = 0; i < ids.size(); i++) {
+        ArucoMarker *marker = [[ArucoMarker alloc] init];
+    }
 
     return arucos;
 }
 
-// test returns "Hello world" just to be sure that the file is built and linked correctly
-+(NSString *) test { return @"Hello world"; }
++(BOOL)linkedAndLoaded { return YES; }
 
 @end
