@@ -11,44 +11,11 @@
 		6461BB9229D119A600CF2442 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461BB9129D119A600CF2442 /* ContentView.swift */; };
 		6461BB9429D119A600CF2442 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6461BB9329D119A600CF2442 /* Assets.xcassets */; };
 		6461BB9729D119A600CF2442 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6461BB9629D119A600CF2442 /* Preview Assets.xcassets */; };
-		6461BBA129D119A600CF2442 /* arucopublisherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461BBA029D119A600CF2442 /* arucopublisherTests.swift */; };
-		6461BBAB29D119A700CF2442 /* arucopublisherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461BBAA29D119A700CF2442 /* arucopublisherUITests.swift */; };
-		6461BBAD29D119A700CF2442 /* arucopublisherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461BBAC29D119A700CF2442 /* arucopublisherUITestsLaunchTests.swift */; };
-		6487F4B029D11E25009A295E /* opencv2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6487F4AF29D11E25009A295E /* opencv2.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		6487F4B429D11E71009A295E /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6487F4B329D11E71009A295E /* OpenCVWrapper.mm */; };
+		64C4525B29D1389200FB14F8 /* ArucoMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C4525A29D1389200FB14F8 /* ArucoMarker.swift */; };
+		64C4526429D1472D00FB14F8 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6487F4AF29D11E25009A295E /* opencv2.framework */; };
+		C9FFB157A6C70B1D307FA7F2 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFBB8A8C530FC0FDC58087 /* OpenCVWrapper.mm */; };
 		C9FFB513D7D128879D55B301 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C9FFBA5081B63463D762E688 /* .gitignore */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		6461BB9D29D119A600CF2442 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6461BB8429D119A600CF2442 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6461BB8B29D119A600CF2442;
-			remoteInfo = arucopublisher;
-		};
-		6461BBA729D119A700CF2442 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6461BB8429D119A600CF2442 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6461BB8B29D119A600CF2442;
-			remoteInfo = arucopublisher;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		6461BBC329D11BFB00CF2442 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				6487F4B029D11E25009A295E /* opencv2.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6461BB8C29D119A600CF2442 /* arucopublisher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = arucopublisher.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -56,15 +23,15 @@
 		6461BB9129D119A600CF2442 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6461BB9329D119A600CF2442 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6461BB9629D119A600CF2442 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		6461BB9C29D119A600CF2442 /* arucopublisherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = arucopublisherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6461BBA029D119A600CF2442 /* arucopublisherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = arucopublisherTests.swift; sourceTree = "<group>"; };
-		6461BBA629D119A700CF2442 /* arucopublisherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = arucopublisherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6461BBAA29D119A700CF2442 /* arucopublisherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = arucopublisherUITests.swift; sourceTree = "<group>"; };
 		6461BBAC29D119A700CF2442 /* arucopublisherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = arucopublisherUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6487F4AF29D11E25009A295E /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = dependencies/opencv2.framework; sourceTree = "<group>"; };
-		6487F4B329D11E71009A295E /* OpenCVWrapper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
-		6487F4B529D11E97009A295E /* OpenCVWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
+		64C4525A29D1389200FB14F8 /* ArucoMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArucoMarker.swift; sourceTree = "<group>"; };
+		C9FFB49D279F34933DF52388 /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		C9FFBA5081B63463D762E688 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
+		C9FFBB8A8C530FC0FDC58087 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
+		C9FFBEA99058A427FE4C707B /* OpenCVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,20 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6461BB9929D119A600CF2442 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6461BBA329D119A700CF2442 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				64C4526429D1472D00FB14F8 /* opencv2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,8 +63,6 @@
 			isa = PBXGroup;
 			children = (
 				6461BB8C29D119A600CF2442 /* arucopublisher.app */,
-				6461BB9C29D119A600CF2442 /* arucopublisherTests.xctest */,
-				6461BBA629D119A700CF2442 /* arucopublisherUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,8 +74,7 @@
 				6461BB9129D119A600CF2442 /* ContentView.swift */,
 				6461BB9329D119A600CF2442 /* Assets.xcassets */,
 				6461BB9529D119A600CF2442 /* Preview Content */,
-				6487F4B329D11E71009A295E /* OpenCVWrapper.mm */,
-				6487F4B529D11E97009A295E /* OpenCVWrapper.h */,
+				C9FFBEA399D10098189815F4 /* aruco */,
 			);
 			path = arucopublisher;
 			sourceTree = "<group>";
@@ -160,6 +111,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		C9FFBEA399D10098189815F4 /* aruco */ = {
+			isa = PBXGroup;
+			children = (
+				C9FFBB8A8C530FC0FDC58087 /* OpenCVWrapper.mm */,
+				C9FFBEA99058A427FE4C707B /* OpenCVWrapper.h */,
+				64C4525A29D1389200FB14F8 /* ArucoMarker.swift */,
+				C9FFB49D279F34933DF52388 /* Bridging.h */,
+			);
+			path = aruco;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -170,7 +132,6 @@
 				6461BB8829D119A600CF2442 /* Sources */,
 				6461BB8929D119A600CF2442 /* Frameworks */,
 				6461BB8A29D119A600CF2442 /* Resources */,
-				6461BBC329D11BFB00CF2442 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -180,42 +141,6 @@
 			productName = arucopublisher;
 			productReference = 6461BB8C29D119A600CF2442 /* arucopublisher.app */;
 			productType = "com.apple.product-type.application";
-		};
-		6461BB9B29D119A600CF2442 /* arucopublisherTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6461BBB329D119A700CF2442 /* Build configuration list for PBXNativeTarget "arucopublisherTests" */;
-			buildPhases = (
-				6461BB9829D119A600CF2442 /* Sources */,
-				6461BB9929D119A600CF2442 /* Frameworks */,
-				6461BB9A29D119A600CF2442 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6461BB9E29D119A600CF2442 /* PBXTargetDependency */,
-			);
-			name = arucopublisherTests;
-			productName = arucopublisherTests;
-			productReference = 6461BB9C29D119A600CF2442 /* arucopublisherTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		6461BBA529D119A700CF2442 /* arucopublisherUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 6461BBB629D119A700CF2442 /* Build configuration list for PBXNativeTarget "arucopublisherUITests" */;
-			buildPhases = (
-				6461BBA229D119A700CF2442 /* Sources */,
-				6461BBA329D119A700CF2442 /* Frameworks */,
-				6461BBA429D119A700CF2442 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				6461BBA829D119A700CF2442 /* PBXTargetDependency */,
-			);
-			name = arucopublisherUITests;
-			productName = arucopublisherUITests;
-			productReference = 6461BBA629D119A700CF2442 /* arucopublisherUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -230,14 +155,6 @@
 					6461BB8B29D119A600CF2442 = {
 						CreatedOnToolsVersion = 14.2;
 						LastSwiftMigration = 1420;
-					};
-					6461BB9B29D119A600CF2442 = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 6461BB8B29D119A600CF2442;
-					};
-					6461BBA529D119A700CF2442 = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 6461BB8B29D119A600CF2442;
 					};
 				};
 			};
@@ -255,8 +172,6 @@
 			projectRoot = "";
 			targets = (
 				6461BB8B29D119A600CF2442 /* arucopublisher */,
-				6461BB9B29D119A600CF2442 /* arucopublisherTests */,
-				6461BBA529D119A700CF2442 /* arucopublisherUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -272,20 +187,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6461BB9A29D119A600CF2442 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6461BBA429D119A700CF2442 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -293,43 +194,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				64C4525B29D1389200FB14F8 /* ArucoMarker.swift in Sources */,
 				6461BB9229D119A600CF2442 /* ContentView.swift in Sources */,
 				6461BB9029D119A600CF2442 /* arucopublisherApp.swift in Sources */,
-				6487F4B429D11E71009A295E /* OpenCVWrapper.mm in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6461BB9829D119A600CF2442 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6461BBA129D119A600CF2442 /* arucopublisherTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6461BBA229D119A700CF2442 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6461BBAD29D119A700CF2442 /* arucopublisherUITestsLaunchTests.swift in Sources */,
-				6461BBAB29D119A700CF2442 /* arucopublisherUITests.swift in Sources */,
+				C9FFB157A6C70B1D307FA7F2 /* OpenCVWrapper.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		6461BB9E29D119A600CF2442 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6461BB8B29D119A600CF2442 /* arucopublisher */;
-			targetProxy = 6461BB9D29D119A600CF2442 /* PBXContainerItemProxy */;
-		};
-		6461BBA829D119A700CF2442 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 6461BB8B29D119A600CF2442 /* arucopublisher */;
-			targetProxy = 6461BBA729D119A700CF2442 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		6461BBAE29D119A700CF2442 /* Debug */ = {
@@ -474,9 +346,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.semior001.arucopublisher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = arucopublisher/aruco/Bridging.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -509,87 +383,13 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.github.semior001.arucopublisher;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = arucopublisher/aruco/Bridging.h;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		6461BBB429D119A700CF2442 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5QXF333L5P;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.semior001.arucopublisherTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/arucopublisher.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/arucopublisher";
-			};
-			name = Debug;
-		};
-		6461BBB529D119A700CF2442 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5QXF333L5P;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.semior001.arucopublisherTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/arucopublisher.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/arucopublisher";
-			};
-			name = Release;
-		};
-		6461BBB729D119A700CF2442 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5QXF333L5P;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.semior001.arucopublisherUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = arucopublisher;
-			};
-			name = Debug;
-		};
-		6461BBB829D119A700CF2442 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5QXF333L5P;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.github.semior001.arucopublisherUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = arucopublisher;
 			};
 			name = Release;
 		};
@@ -610,24 +410,6 @@
 			buildConfigurations = (
 				6461BBB129D119A700CF2442 /* Debug */,
 				6461BBB229D119A700CF2442 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6461BBB329D119A700CF2442 /* Build configuration list for PBXNativeTarget "arucopublisherTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6461BBB429D119A700CF2442 /* Debug */,
-				6461BBB529D119A700CF2442 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		6461BBB629D119A700CF2442 /* Build configuration list for PBXNativeTarget "arucopublisherUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6461BBB729D119A700CF2442 /* Debug */,
-				6461BBB829D119A700CF2442 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

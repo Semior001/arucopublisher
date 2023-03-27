@@ -14,4 +14,9 @@ struct arucopublisherApp: App {
             ContentView()
         }
     }
+
+    // call test from OpenCVWrapper, to be sure that objc files are linked
+    init() {
+        NSLog("OpenCV loaded: \(OpenCVWrapper.test())")
+    }
 }
