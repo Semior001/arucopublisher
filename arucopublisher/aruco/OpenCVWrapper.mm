@@ -16,6 +16,9 @@
 #include "OpenCVWrapper.h"
 #include "Bridging.h"
 
+@implementation ArucoMarker
+@end
+
 @implementation OpenCVWrapper
 
 template<typename T, typename U>
@@ -126,7 +129,51 @@ static Triple<std::vector<cv::Vec3d>, std::vector<cv::Vec3d>, std::vector<cv::Ma
     );
 
     for (int i = 0; i < ids.size(); i++) {
-        ArucoMarker *marker = [[ArucoMarker alloc] init];
+        ArucoMarker *aruco = [ArucoMarker new];
+        aruco.id = ids[i];
+
+        aruco.position = {
+                static_cast<float>(tvecs[i][0]),
+                static_cast<float>(tvecs[i][1]),
+                static_cast<float>(tvecs[i][2])
+        };
+
+        aruco.orientation = {
+                static_cast<float>(rvecs[i][0]),
+                static_cast<float>(rvecs[i][1]),
+                static_cast<float>(rvecs[i][2])
+        };
+
+        aruco.corners = {
+                {static_cast<float>(corners[i][0].x), static_cast<float>(corners[i][0].y)},
+                {static_cast<float>(corners[i][1].x), static_cast<float>(corners[i][1].y)},
+                {static_cast<float>(corners[i][2].x), static_cast<float>(corners[i][2].y)},
+                {static_cast<float>(corners[i][3].x), static_cast<float>(corners[i][3].y)}
+        };
+
+        aruco.imageVectors = {
+                {
+                        static_cast<float>(imagePoints[i].at<double>(0, 0)),
+                        static_cast<float>(imagePoints[i].at<double>(0, 1))
+                },
+                {
+                        static_cast<float>(imagePoints[i].at<double>(1, 0)),
+                        static_cast<float>(imagePoints[i].at<double>(1, 1))
+                },
+                {
+                        static_cast<float>(imagePoints[i].at<double>(2, 0)),
+                        static_cast<float>(imagePoints[i].at<double>(2, 1))
+                },
+                {
+                        static_cast<float>(imagePoints[i].at<double>(3, 0)),
+                        static_cast<float>(imagePoints[i].at<double>(3, 1))
+                }
+        };
+
+        aruco.imageWidth = static_cast<int>(width);
+        aruco.imageHeight = static_cast<int>(height);
+
+        [arucos addObject:aruco];
     }
 
     return arucos;

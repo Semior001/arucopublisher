@@ -13,6 +13,24 @@
 
 @class NSArray;
 
+// Quartet is a struct that contains exactly four points.
+typedef struct Quartet {
+    CGPoint first;
+    CGPoint second;
+    CGPoint third;
+    CGPoint fourth;
+} Quartet;
+
+@interface ArucoMarker : NSObject
+@property (nonatomic) int id;
+@property (nonatomic) SCNVector3 position;
+@property (nonatomic) SCNVector3 orientation;
+@property (nonatomic) Quartet corners;
+@property (nonatomic) int imageWidth;
+@property (nonatomic) int imageHeight;
+@property (nonatomic) Quartet imageVectors;
+@end
+
 @interface OpenCVWrapper : NSObject
 
 // detectAndLocalize accepts:
