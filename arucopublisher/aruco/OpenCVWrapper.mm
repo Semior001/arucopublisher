@@ -54,8 +54,16 @@ const double orientationVectorLength = 1;
 
 static Triple<std::vector<cv::Vec3d>, std::vector<cv::Vec3d>, std::vector<cv::Mat>> estimatePosesAndOrientation(
         std::vector<std::vector<cv::Point2f>> corners,
-        cv::Mat intrinMat, NSArray *distortionCoefficients, Float64 markerSize
+        NSArray *intrinsics, NSArray *distortionCoefficients, Float64 markerSize
 ) {
+    cv::Mat intrinMat(3,3,CV_64F);
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            intrinMat.at<double>(i,j) = [intrinsics[static_cast<NSUInteger>(i)][static_cast<NSUInteger>(j)] doubleValue];
+        }
+    }
+
     std::vector<cv::Vec3d> rvecs, tvecs;
     cv::Mat distCoeffs(8, 1, CV_64F);
 
@@ -95,9 +103,9 @@ static Triple<std::vector<cv::Vec3d>, std::vector<cv::Vec3d>, std::vector<cv::Ma
 
 
 // detectAndLocalize accepts an image as an input and returns a list of ArucoMarker
-+(NSArray *)detectAndLocalize:(CVPixelBufferRef) pixelBuffer
-               withIntrinsics:(matrix_float3x3) intrinsics
-       distortionCoefficients:(NSArray *) distortionCoefficients
++(NSArray *)detectAndLocalize:(CVPixelBufferRef)pixelBuffer
+               withIntrinsics:(NSArray *)intrinsics
+       distortionCoefficients:(NSArray *)distortionCoefficients
                    markerSize:(Float64) markerSize {
 
     CGFloat width = CVPixelBufferGetWidth(pixelBuffer);
@@ -115,19 +123,9 @@ static Triple<std::vector<cv::Vec3d>, std::vector<cv::Vec3d>, std::vector<cv::Ma
         return arucos;
     }
 
-    cv::Mat intrinMat(3,3,CV_64F);
-    intrinMat.at<Float64>(0,0) = intrinsics.columns[0][0];
-    intrinMat.at<Float64>(0,1) = intrinsics.columns[1][0];
-    intrinMat.at<Float64>(0,2) = intrinsics.columns[2][0];
-    intrinMat.at<Float64>(1,0) = intrinsics.columns[0][1];
-    intrinMat.at<Float64>(1,1) = intrinsics.columns[1][1];
-    intrinMat.at<Float64>(1,2) = intrinsics.columns[2][1];
-    intrinMat.at<Float64>(2,0) = intrinsics.columns[0][2];
-    intrinMat.at<Float64>(2,1) = intrinsics.columns[1][2];
-    intrinMat.at<Float64>(2,2) = intrinsics.columns[2][2];
-
     auto [rvecs, tvecs, imagePoints] = estimatePosesAndOrientation(
-            corners, intrinMat, distortionCoefficients, markerSize
+            corners,
+            intrinsics, distortionCoefficients, markerSize
     );
 
     for (int i = 0; i < ids.size(); i++) {

@@ -12,8 +12,6 @@
 		6461BB9429D119A600CF2442 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6461BB9329D119A600CF2442 /* Assets.xcassets */; };
 		6461BB9729D119A600CF2442 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6461BB9629D119A600CF2442 /* Preview Assets.xcassets */; };
 		64C4526429D1472D00FB14F8 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6487F4AF29D11E25009A295E /* opencv2.framework */; };
-		64C4526629D1741700FB14F8 /* UIColor+HSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64C4526529D1741700FB14F8 /* UIColor+HSV.swift */; };
-		64C4527429D18F6E00FB14F8 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 64C4527329D18F6E00FB14F8 /* Storyboard.storyboard */; };
 		C9FFB157A6C70B1D307FA7F2 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFBB8A8C530FC0FDC58087 /* OpenCVWrapper.mm */; };
 		C9FFB513D7D128879D55B301 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C9FFBA5081B63463D762E688 /* .gitignore */; };
 /* End PBXBuildFile section */
@@ -28,8 +26,6 @@
 		6461BBAA29D119A700CF2442 /* arucopublisherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = arucopublisherUITests.swift; sourceTree = "<group>"; };
 		6461BBAC29D119A700CF2442 /* arucopublisherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = arucopublisherUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6487F4AF29D11E25009A295E /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = dependencies/opencv2.framework; sourceTree = "<group>"; };
-		64C4526529D1741700FB14F8 /* UIColor+HSV.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+HSV.swift"; sourceTree = "<group>"; };
-		64C4527329D18F6E00FB14F8 /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		C9FFB49D279F34933DF52388 /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
 		C9FFBA5081B63463D762E688 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		C9FFBB8A8C530FC0FDC58087 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
@@ -72,13 +68,11 @@
 		6461BB8E29D119A600CF2442 /* arucopublisher */ = {
 			isa = PBXGroup;
 			children = (
-				64C4526529D1741700FB14F8 /* UIColor+HSV.swift */,
 				6461BB8F29D119A600CF2442 /* arucopublisherApp.swift */,
 				6461BB9129D119A600CF2442 /* ContentView.swift */,
 				6461BB9329D119A600CF2442 /* Assets.xcassets */,
 				6461BB9529D119A600CF2442 /* Preview Content */,
 				C9FFBEA399D10098189815F4 /* aruco */,
-				64C4527329D18F6E00FB14F8 /* Storyboard.storyboard */,
 			);
 			path = arucopublisher;
 			sourceTree = "<group>";
@@ -185,7 +179,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6461BB9729D119A600CF2442 /* Preview Assets.xcassets in Resources */,
-				64C4527429D18F6E00FB14F8 /* Storyboard.storyboard in Resources */,
 				6461BB9429D119A600CF2442 /* Assets.xcassets in Resources */,
 				C9FFB513D7D128879D55B301 /* .gitignore in Resources */,
 			);
@@ -199,7 +192,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				6461BB9229D119A600CF2442 /* ContentView.swift in Sources */,
-				64C4526629D1741700FB14F8 /* UIColor+HSV.swift in Sources */,
 				6461BB9029D119A600CF2442 /* arucopublisherApp.swift in Sources */,
 				C9FFB157A6C70B1D307FA7F2 /* OpenCVWrapper.mm in Sources */,
 			);
@@ -259,7 +251,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -316,7 +307,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

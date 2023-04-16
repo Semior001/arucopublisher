@@ -39,7 +39,7 @@ typedef struct Quartet {
 // - distortion coefficients (in form of an array of floats)
 // - and marker size as an input and returns a list of ArucoMarker
 + (NSArray *)detectAndLocalize:(CVPixelBufferRef)pixelBuffer
-                withIntrinsics:(matrix_float3x3)intrinsics
+                withIntrinsics:(NSArray *)intrinsics
         distortionCoefficients:(NSArray *)distortionCoefficients
                     markerSize:(Float64)markerSize;
 
