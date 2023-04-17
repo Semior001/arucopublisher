@@ -35,67 +35,83 @@ struct Triple {
 };
 
 static Pair<std::vector<std::vector<cv::Point2f>>, std::vector<int>> detect(int width, int height, CVPixelBufferRef pixelBuffer) {
-    cv::Ptr<cv::aruco::Dictionary> dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_5X5_250);
+    NSLog(@"[DEBUG] detecting markers, width: %d, height: %d", width, height);
 
-    // grey scale channel at 0
+    cv::Ptr<cv::aruco::Dictionary> dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_4X4_50);
+
     CVPixelBufferLockBaseAddress(pixelBuffer, 0);
     void *baseaddress = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
-    cv::Mat mat(height, width, CV_8UC1, baseaddress, 0);
+    cv::Mat image(height, width, CV_8UC1, baseaddress, CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0));
+
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//    NSString *documentsDirectoryPath = [paths firstObject];
+//    NSString *outputImagePath = [documentsDirectoryPath stringByAppendingPathComponent:@"output.png"];
+//
+//    bool success = false;
+//
+//    @try {
+//        success = cv::imwrite([outputImagePath UTF8String], image);
+//    }
+//    @catch (NSException *exception) {
+//        NSLog(@"[ERROR] exception: %@", exception);
+//    }
+//
+//    NSLog(@"[DEBUG] saved image to: %@, success: %d", outputImagePath, success);
 
     std::vector<int> ids;
     std::vector<std::vector<cv::Point2f>> corners;
 
+    cv::aruco::detectMarkers(image, dictionary, corners, ids);
     CVPixelBufferUnlockBaseAddress(pixelBuffer, 0);
 
     return {corners, ids};
 }
 
-const double orientationVectorLength = 1;
+const float orientationVectorLength = 1;
 
-static Triple<std::vector<cv::Vec3d>, std::vector<cv::Vec3d>, std::vector<cv::Mat>> estimatePosesAndOrientation(
+static Triple<std::vector<cv::Vec3d>, std::vector<cv::Vec3d>, std::vector<std::vector<cv::Point2f>>> estimatePosesAndOrientation(
         std::vector<std::vector<cv::Point2f>> corners,
-        NSArray *intrinsics, NSArray *distortionCoefficients, Float64 markerSize
+        NSArray *intrinsics, Float64 markerSize
 ) {
-    cv::Mat intrinMat(3,3,CV_64F);
+    cv::Mat intrinMat(3, 3, CV_64F);
 
-    for (int i = 0; i < 3; i++) {
-        for (int j = 0; j < 3; j++) {
-            intrinMat.at<double>(i,j) = [intrinsics[static_cast<NSUInteger>(i)][static_cast<NSUInteger>(j)] doubleValue];
-        }
-    }
+    // convert intrinsics, they're provided in linear array
+    intrinMat.at<Float64>(0, 0) = [intrinsics[0] doubleValue];
+    intrinMat.at<Float64>(0, 1) = [intrinsics[1] doubleValue];
+    intrinMat.at<Float64>(0, 2) = [intrinsics[2] doubleValue];
+    intrinMat.at<Float64>(1, 0) = [intrinsics[3] doubleValue];
+    intrinMat.at<Float64>(1, 1) = [intrinsics[4] doubleValue];
+    intrinMat.at<Float64>(1, 2) = [intrinsics[5] doubleValue];
+    intrinMat.at<Float64>(2, 0) = [intrinsics[6] doubleValue];
+    intrinMat.at<Float64>(2, 1) = [intrinsics[7] doubleValue];
+    intrinMat.at<Float64>(2, 2) = [intrinsics[8] doubleValue];
+
+    cv::Mat distCoeffs = cv::Mat::zeros(8, 1, CV_64F);
 
     std::vector<cv::Vec3d> rvecs, tvecs;
-    cv::Mat distCoeffs(8, 1, CV_64F);
-
-    for (int i = 0; i < 8; i++) {
-        distCoeffs.at<double>(i,0) = [distortionCoefficients[static_cast<NSUInteger>(i)] doubleValue];
-    }
 
     cv::aruco::estimatePoseSingleMarkers(corners, static_cast<float>(markerSize), intrinMat, distCoeffs, rvecs, tvecs);
-    NSLog(@"found: rvecs.size(): %lu", rvecs.size());
+    NSLog(@"[DEBUG] found: rvecs.size(): %lu", rvecs.size());
 
     // project points
-    std::vector<cv::Mat> imagePoints;
+    std::vector<std::vector<cv::Point2f>> imagePoints;
 
     for (int i = 0; i < rvecs.size(); i++) {
-        cv::Mat axesPointsMat = cv::Mat::zeros(4, 3, CV_64F);
-
-        // 0, 0, 0
-        // orientation vector length, 0, 0
-        // 0, orientation vector length, 0
-        // 0, 0, orientation vector length
-        axesPointsMat.at<double>(1, 0) = orientationVectorLength;
-        axesPointsMat.at<double>(2, 1) = orientationVectorLength;
-        axesPointsMat.at<double>(3, 2) = orientationVectorLength;
-
-        cv::fisheye::projectPoints(
-                axesPointsMat,
+        std::vector<cv::Point2f> imagePointsForMarker;
+        cv::projectPoints(
+                std::vector<cv::Point3f>{
+                        {0, 0, 0},
+                        {orientationVectorLength, 0, 0},
+                        {0, orientationVectorLength, 0},
+                        {0, 0, orientationVectorLength}
+                },
                 rvecs[i],
                 tvecs[i],
                 intrinMat,
                 distCoeffs,
-                imagePoints[i]
+                imagePointsForMarker
         );
+        imagePoints.push_back(imagePointsForMarker);
     }
 
     return {rvecs, tvecs, imagePoints};
@@ -103,10 +119,9 @@ static Triple<std::vector<cv::Vec3d>, std::vector<cv::Vec3d>, std::vector<cv::Ma
 
 
 // detectAndLocalize accepts an image as an input and returns a list of ArucoMarker
-+(NSArray *)detectAndLocalize:(CVPixelBufferRef)pixelBuffer
-               withIntrinsics:(NSArray *)intrinsics
-       distortionCoefficients:(NSArray *)distortionCoefficients
-                   markerSize:(Float64) markerSize {
++ (NSArray *)detectAndLocalize:(CVPixelBufferRef)pixelBuffer
+                withIntrinsics:(NSArray *)intrinsics
+                    markerSize:(Float64)markerSize {
 
     CGFloat width = CVPixelBufferGetWidth(pixelBuffer);
     CGFloat height = CVPixelBufferGetHeight(pixelBuffer);
@@ -119,13 +134,14 @@ static Triple<std::vector<cv::Vec3d>, std::vector<cv::Vec3d>, std::vector<cv::Ma
     }
 
     NSMutableArray *arucos = [NSMutableArray new];
-    if(ids.size() == 0) {
+    if (ids.size() == 0) {
         return arucos;
     }
 
     auto [rvecs, tvecs, imagePoints] = estimatePosesAndOrientation(
             corners,
-            intrinsics, distortionCoefficients, markerSize
+            intrinsics,
+            markerSize
     );
 
     for (int i = 0; i < ids.size(); i++) {
@@ -151,24 +167,12 @@ static Triple<std::vector<cv::Vec3d>, std::vector<cv::Vec3d>, std::vector<cv::Ma
                 {static_cast<float>(corners[i][3].x), static_cast<float>(corners[i][3].y)}
         };
 
-        aruco.imageVectors = {
-                {
-                        static_cast<float>(imagePoints[i].at<double>(0, 0)),
-                        static_cast<float>(imagePoints[i].at<double>(0, 1))
-                },
-                {
-                        static_cast<float>(imagePoints[i].at<double>(1, 0)),
-                        static_cast<float>(imagePoints[i].at<double>(1, 1))
-                },
-                {
-                        static_cast<float>(imagePoints[i].at<double>(2, 0)),
-                        static_cast<float>(imagePoints[i].at<double>(2, 1))
-                },
-                {
-                        static_cast<float>(imagePoints[i].at<double>(3, 0)),
-                        static_cast<float>(imagePoints[i].at<double>(3, 1))
-                }
-        };
+       aruco.imageVectors = {
+               {static_cast<float>(imagePoints[i][0].x), static_cast<float>(imagePoints[i][0].y)},
+               {static_cast<float>(imagePoints[i][1].x), static_cast<float>(imagePoints[i][1].y)},
+               {static_cast<float>(imagePoints[i][2].x), static_cast<float>(imagePoints[i][2].y)},
+               {static_cast<float>(imagePoints[i][3].x), static_cast<float>(imagePoints[i][3].y)}
+       };
 
         aruco.imageWidth = static_cast<int>(width);
         aruco.imageHeight = static_cast<int>(height);
@@ -179,6 +183,8 @@ static Triple<std::vector<cv::Vec3d>, std::vector<cv::Vec3d>, std::vector<cv::Ma
     return arucos;
 }
 
-+(BOOL)linkedAndLoaded { return YES; }
++ (BOOL)linkedAndLoaded {
+    return YES;
+}
 
 @end

@@ -40,7 +40,6 @@ typedef struct Quartet {
 // - and marker size as an input and returns a list of ArucoMarker
 + (NSArray *)detectAndLocalize:(CVPixelBufferRef)pixelBuffer
                 withIntrinsics:(NSArray *)intrinsics
-        distortionCoefficients:(NSArray *)distortionCoefficients
                     markerSize:(Float64)markerSize;
 
 // linkedAndLoaded constantly returns true, used just to be sure, that the file is linked and loaded

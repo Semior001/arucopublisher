@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6420D14329ECBAC7005E63ED /* FrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6420D14229ECBAC7005E63ED /* FrameView.swift */; };
+		6420D14529ECBAE2005E63ED /* FrameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6420D14429ECBAE2005E63ED /* FrameHandler.swift */; };
 		6461BB9029D119A600CF2442 /* arucopublisherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461BB8F29D119A600CF2442 /* arucopublisherApp.swift */; };
 		6461BB9229D119A600CF2442 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461BB9129D119A600CF2442 /* ContentView.swift */; };
 		6461BB9429D119A600CF2442 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6461BB9329D119A600CF2442 /* Assets.xcassets */; };
@@ -17,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6420D14229ECBAC7005E63ED /* FrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameView.swift; sourceTree = "<group>"; };
+		6420D14429ECBAE2005E63ED /* FrameHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameHandler.swift; sourceTree = "<group>"; };
+		6420D14629ECD50A005E63ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6461BB8C29D119A600CF2442 /* arucopublisher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = arucopublisher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6461BB8F29D119A600CF2442 /* arucopublisherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = arucopublisherApp.swift; sourceTree = "<group>"; };
 		6461BB9129D119A600CF2442 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -68,11 +73,14 @@
 		6461BB8E29D119A600CF2442 /* arucopublisher */ = {
 			isa = PBXGroup;
 			children = (
+				6420D14629ECD50A005E63ED /* Info.plist */,
 				6461BB8F29D119A600CF2442 /* arucopublisherApp.swift */,
 				6461BB9129D119A600CF2442 /* ContentView.swift */,
 				6461BB9329D119A600CF2442 /* Assets.xcassets */,
 				6461BB9529D119A600CF2442 /* Preview Content */,
 				C9FFBEA399D10098189815F4 /* aruco */,
+				6420D14229ECBAC7005E63ED /* FrameView.swift */,
+				6420D14429ECBAE2005E63ED /* FrameHandler.swift */,
 			);
 			path = arucopublisher;
 			sourceTree = "<group>";
@@ -191,9 +199,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6420D14329ECBAC7005E63ED /* FrameView.swift in Sources */,
 				6461BB9229D119A600CF2442 /* ContentView.swift in Sources */,
 				6461BB9029D119A600CF2442 /* arucopublisherApp.swift in Sources */,
 				C9FFB157A6C70B1D307FA7F2 /* OpenCVWrapper.mm in Sources */,
+				6420D14529ECBAE2005E63ED /* FrameHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,7 +344,10 @@
 					"$(PROJECT_DIR)/dependencies",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = arucopublisher/Info.plist;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to detect ArUco markers.";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "This app requires permission to save debug images";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -372,7 +385,10 @@
 					"$(PROJECT_DIR)/dependencies",
 				);
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = arucopublisher/Info.plist;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "This app requires access to the camera to detect ArUco markers.";
+				INFOPLIST_KEY_NSFileProviderDomainUsageDescription = "This app requires permission to save debug images";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
