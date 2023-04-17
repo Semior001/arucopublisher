@@ -24,16 +24,22 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
     override init() {
         super.init()
         checkPermissions()
+        setupCaptureSession()
         sessionQueue.async { [unowned self] in
-            setupCaptureSession()
             captureSession.startRunning()
         }
     }
 
     func toggleFlash(value: Bool) {
-        guard let device = AVCaptureDevice.default(.builtInDualWideCamera,for: .video, position: .back) else { return }
-        guard device.hasTorch else { return }
-        guard device.isTorchModeSupported(.on) else { return }
+        guard let device = AVCaptureDevice.default(.builtInDualWideCamera, for: .video, position: .back) else {
+            return
+        }
+        guard device.hasTorch else {
+            return
+        }
+        guard device.isTorchModeSupported(.on) else {
+            return
+        }
 
         do {
             try device.lockForConfiguration()
@@ -64,10 +70,18 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
     func setupCaptureSession() {
         let videoOutput = AVCaptureVideoDataOutput()
 
-        guard permissionGranted else { return }
-        guard let videoDevice = AVCaptureDevice.default(.builtInDualWideCamera,for: .video, position: .back) else { return }
-        guard let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice) else { return }
-        guard captureSession.canAddInput(videoDeviceInput) else { return }
+        guard permissionGranted else {
+            return
+        }
+        guard let videoDevice = AVCaptureDevice.default(.builtInDualWideCamera, for: .video, position: .back) else {
+            return
+        }
+        guard let videoDeviceInput = try? AVCaptureDeviceInput(device: videoDevice) else {
+            return
+        }
+        guard captureSession.canAddInput(videoDeviceInput) else {
+            return
+        }
         captureSession.addInput(videoDeviceInput)
         videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "sampleBufferQueue"))
         captureSession.addOutput(videoOutput)
@@ -77,16 +91,23 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
         videoOutput.connection(with: .video)?.videoOrientation = .landscapeRight
     }
 
+    func stop() {
+        sessionQueue.sync {}
+        captureSession.stopRunning()
+    }
+
     func captureOutput(
-        _ output: AVCaptureOutput,
-        didOutput buffer: CMSampleBuffer,
-        from connection: AVCaptureConnection
+            _ output: AVCaptureOutput,
+            didOutput buffer: CMSampleBuffer,
+            from connection: AVCaptureConnection
     ) {
-        guard let imageBuffer = CMSampleBufferGetImageBuffer(buffer) else { return }
+        guard let imageBuffer = CMSampleBufferGetImageBuffer(buffer) else {
+            return
+        }
 
         let cameraStats = getCameraStats(
-            buffer: buffer,
-            from: (captureSession.inputs.first as! AVCaptureDeviceInput).device
+                buffer: buffer,
+                from: (captureSession.inputs.first as! AVCaptureDeviceInput).device
         )
 
         var markers: [ArucoMarker] = []
@@ -103,7 +124,9 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
             NSLog("[DEBUG] found \(markers.count) markers")
         }
 
-        guard let cgImage = drawInfo(sampleBuffer: buffer, markers: markers) else { return }
+        guard let cgImage = drawInfo(sampleBuffer: buffer, markers: markers) else {
+            return
+        }
 
         DispatchQueue.main.async { [unowned self] in
             frame = cgImage
@@ -117,11 +140,15 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
     }
 
     private func drawInfo(sampleBuffer: CMSampleBuffer, markers: [ArucoMarker]) -> CGImage? {
-        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
+            return nil
+        }
         let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
 
         let context = CIContext(options: [.workingColorSpace: NSNull()])
-        guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return nil }
+        guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else {
+            return nil
+        }
 
         let uiImage = UIImage(cgImage: cgImage)
         UIGraphicsBeginImageContext(uiImage.size)
@@ -157,13 +184,15 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
 
         if let camData = CMGetAttachment(
                 buffer,
-                key:kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix,
-                attachmentModeOut:nil
+                key: kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix,
+                attachmentModeOut: nil
         ) as? Data {
-            let matrix: matrix_float3x3 = camData.withUnsafeBytes { $0.pointee }
+            let matrix: matrix_float3x3 = camData.withUnsafeBytes {
+                $0.pointee
+            }
             for i in 0..<3 {
                 for j in 0..<3 {
-                    intrinsics[i*3+j] = NSNumber(value: matrix[i][j])
+                    intrinsics[i * 3 + j] = NSNumber(value: matrix[i][j])
                 }
             }
         }

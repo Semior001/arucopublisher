@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct arucopublisherApp: App {
+    @ObservedObject private var state = AppState()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if state.settings {
+                SettingsView().environmentObject(state)
+            } else {
+                ContentView().environmentObject(state)
+            }
         }
     }
 
