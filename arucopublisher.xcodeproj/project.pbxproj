@@ -7,37 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6420D14529ECBAE2005E63ED /* FrameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6420D14429ECBAE2005E63ED /* FrameHandler.swift */; };
 		6461BB9029D119A600CF2442 /* arucopublisherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461BB8F29D119A600CF2442 /* arucopublisherApp.swift */; };
-		6461BB9229D119A600CF2442 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6461BB9129D119A600CF2442 /* ContentView.swift */; };
 		6461BB9429D119A600CF2442 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6461BB9329D119A600CF2442 /* Assets.xcassets */; };
 		6461BB9729D119A600CF2442 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6461BB9629D119A600CF2442 /* Preview Assets.xcassets */; };
 		64C4526429D1472D00FB14F8 /* opencv2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6487F4AF29D11E25009A295E /* opencv2.framework */; };
 		C9FFB157A6C70B1D307FA7F2 /* OpenCVWrapper.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9FFBB8A8C530FC0FDC58087 /* OpenCVWrapper.mm */; };
 		C9FFB513D7D128879D55B301 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C9FFBA5081B63463D762E688 /* .gitignore */; };
-		C9FFB52349209C693DC72FE1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFB6CE4D64A27D3EEF02DC /* SettingsView.swift */; };
+		C9FFB9AE1EA7348BDAC0A835 /* FrameHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFB40B19D1C11BBB61177C /* FrameHandler.swift */; };
 		C9FFBAEF969E669929DF28CE /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFB2E84BDCF419658BCBA8 /* AppState.swift */; };
-		C9FFBAF3475BB466FD46D7F4 /* UDPSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFBB9C3ADA34BD55A275F8 /* UDPSender.swift */; };
+		C9FFBBB5097E5B977F61DC1F /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFB3F4042175AFB21DCC90 /* SettingsView.swift */; };
+		C9FFBC24BFC9C2101BB0BA08 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFB1D8F4E07EEAAD405C64 /* ContentView.swift */; };
+		C9FFBE9C241880EDF1EE8504 /* UDPSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFB02E363FD502C9945FBF /* UDPSender.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6420D14429ECBAE2005E63ED /* FrameHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameHandler.swift; sourceTree = "<group>"; };
 		6420D14629ECD50A005E63ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		6461BB8C29D119A600CF2442 /* arucopublisher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = arucopublisher.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6461BB8F29D119A600CF2442 /* arucopublisherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = arucopublisherApp.swift; sourceTree = "<group>"; };
-		6461BB9129D119A600CF2442 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6461BB9329D119A600CF2442 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6461BB9629D119A600CF2442 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		6461BBA029D119A600CF2442 /* arucopublisherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = arucopublisherTests.swift; sourceTree = "<group>"; };
 		6461BBAA29D119A700CF2442 /* arucopublisherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = arucopublisherUITests.swift; sourceTree = "<group>"; };
 		6461BBAC29D119A700CF2442 /* arucopublisherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = arucopublisherUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		6487F4AF29D11E25009A295E /* opencv2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = opencv2.framework; path = dependencies/opencv2.framework; sourceTree = "<group>"; };
+		C9FFB02E363FD502C9945FBF /* UDPSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UDPSender.swift; path = net/UDPSender.swift; sourceTree = "<group>"; };
+		C9FFB1D8F4E07EEAAD405C64 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ContentView.swift; path = view/ContentView.swift; sourceTree = "<group>"; };
 		C9FFB2E84BDCF419658BCBA8 /* AppState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		C9FFB3F4042175AFB21DCC90 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsView.swift; path = view/SettingsView.swift; sourceTree = "<group>"; };
+		C9FFB40B19D1C11BBB61177C /* FrameHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FrameHandler.swift; path = proc/FrameHandler.swift; sourceTree = "<group>"; };
 		C9FFB49D279F34933DF52388 /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bridging.h; sourceTree = "<group>"; };
-		C9FFB6CE4D64A27D3EEF02DC /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C9FFBA5081B63463D762E688 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		C9FFBB8A8C530FC0FDC58087 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
-		C9FFBB9C3ADA34BD55A275F8 /* UDPSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDPSender.swift; sourceTree = "<group>"; };
 		C9FFBEA99058A427FE4C707B /* OpenCVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,14 +79,14 @@
 			children = (
 				6420D14629ECD50A005E63ED /* Info.plist */,
 				6461BB8F29D119A600CF2442 /* arucopublisherApp.swift */,
-				6461BB9129D119A600CF2442 /* ContentView.swift */,
 				6461BB9329D119A600CF2442 /* Assets.xcassets */,
 				6461BB9529D119A600CF2442 /* Preview Content */,
 				C9FFBEA399D10098189815F4 /* aruco */,
-				6420D14429ECBAE2005E63ED /* FrameHandler.swift */,
-				C9FFB6CE4D64A27D3EEF02DC /* SettingsView.swift */,
 				C9FFB2E84BDCF419658BCBA8 /* AppState.swift */,
-				C9FFBB9C3ADA34BD55A275F8 /* UDPSender.swift */,
+				C9FFB02E363FD502C9945FBF /* UDPSender.swift */,
+				C9FFB1D8F4E07EEAAD405C64 /* ContentView.swift */,
+				C9FFB3F4042175AFB21DCC90 /* SettingsView.swift */,
+				C9FFB40B19D1C11BBB61177C /* FrameHandler.swift */,
 			);
 			path = arucopublisher;
 			sourceTree = "<group>";
@@ -205,13 +205,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6461BB9229D119A600CF2442 /* ContentView.swift in Sources */,
 				6461BB9029D119A600CF2442 /* arucopublisherApp.swift in Sources */,
 				C9FFB157A6C70B1D307FA7F2 /* OpenCVWrapper.mm in Sources */,
-				6420D14529ECBAE2005E63ED /* FrameHandler.swift in Sources */,
-				C9FFB52349209C693DC72FE1 /* SettingsView.swift in Sources */,
 				C9FFBAEF969E669929DF28CE /* AppState.swift in Sources */,
-				C9FFBAF3475BB466FD46D7F4 /* UDPSender.swift in Sources */,
+				C9FFBE9C241880EDF1EE8504 /* UDPSender.swift in Sources */,
+				C9FFBC24BFC9C2101BB0BA08 /* ContentView.swift in Sources */,
+				C9FFBBB5097E5B977F61DC1F /* SettingsView.swift in Sources */,
+				C9FFB9AE1EA7348BDAC0A835 /* FrameHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
