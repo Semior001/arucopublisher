@@ -86,11 +86,34 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
     }
 
     private func drawMarkers(sampleBuffer: CMSampleBuffer, markers: [ArucoMarker]) -> CGImage? {
-        guard let imageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
-        let ciImage = CIImage(cvPixelBuffer: imageBuffer)
+        guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
+        let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
+
+        let context = CIContext(options: [.workingColorSpace: NSNull()])
         guard let cgImage = context.createCGImage(ciImage, from: ciImage.extent) else { return nil }
 
-        return cgImage
+        let uiImage = UIImage(cgImage: cgImage)
+        UIGraphicsBeginImageContext(uiImage.size)
+        let contextRef = UIGraphicsGetCurrentContext()
+        uiImage.draw(in: CGRect(origin: .zero, size: uiImage.size))
+
+        contextRef?.setLineWidth(2.0)
+        contextRef?.setStrokeColor(UIColor.red.cgColor)
+
+        for marker in markers {
+            contextRef?.beginPath()
+            contextRef?.move(to: marker.corners.first)
+            contextRef?.addLine(to: marker.corners.second)
+            contextRef?.addLine(to: marker.corners.third)
+            contextRef?.addLine(to: marker.corners.fourth)
+            contextRef?.closePath()
+            contextRef?.strokePath()
+        }
+
+        let drawnImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+
+        return drawnImage?.cgImage
     }
 
     private func getCameraStats(
