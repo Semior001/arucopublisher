@@ -7,6 +7,7 @@ import Foundation
 
 struct SettingsView: View {
     @EnvironmentObject var state: AppState
+    @State private var showAlert = false
 
     @AppStorage("targetServerAddress")
     private var targetServerAddress = ""
@@ -27,8 +28,21 @@ struct SettingsView: View {
                 }
             }.navigationTitle("Settings")
                     .navigationBarItems(trailing: Button("Done") {
+                        // validate
+                        let parts = targetServerAddress.split(separator: ":")
+                        if parts.count != 2 {
+                            showAlert.toggle()
+                            return
+                        }
+
                         state.settings = false
-                    })
+                    }).alert(isPresented: $showAlert) {
+                        Alert(
+                                title: Text("Invalid settings"),
+                                message: Text("Correct settings before quit"),
+                                dismissButton: .default(Text("OK"))
+                        )
+                    }
         }
     }
 

@@ -5,6 +5,7 @@
 //  Created by Yelshat Duskaliyev on 17.04.2023.
 //
 
+import SwiftUI
 import AVFoundation
 import CoreImage
 
@@ -18,8 +19,17 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
     @Published var frame: CGImage?
     @Published var fps: Int = 0
     @Published var processedWithinSeconds: Double = 0
-    @Published var sentWithinSeconds: Double = 0
     private var lastFrameTimestamp: Double = 0
+
+    @AppStorage("targetServerAddress")
+    private var targetServerAddress = ""
+    @AppStorage("iso")
+    private var iso = ""
+    @AppStorage("exposure")
+    private var exposure = ""
+
+    private var sender: UDPSender?
+    private let lock = NSLock()
 
     override init() {
         super.init()
@@ -86,14 +96,41 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
         videoOutput.setSampleBufferDelegate(self, queue: DispatchQueue(label: "sampleBufferQueue"))
         captureSession.addOutput(videoOutput)
 
-        // turn on camera intrinsics matrix delivery
         videoOutput.connection(with: .video)?.isCameraIntrinsicMatrixDeliveryEnabled = true
         videoOutput.connection(with: .video)?.videoOrientation = .landscapeRight
+
+        guard videoDevice.isExposureModeSupported(.custom) else {
+            return
+        }
+
+        do {
+            let iso = Float(iso) ?? 100
+            let exposure = Float(exposure) ?? 0
+
+            try videoDevice.lockForConfiguration()
+            videoDevice.setExposureModeCustom(duration: CMTimeMake(value: 1, timescale: 1000), iso: iso, completionHandler: nil)
+            videoDevice.setExposureTargetBias(exposure, completionHandler: nil)
+            videoDevice.unlockForConfiguration()
+        } catch {
+            print("Could not set exposure")
+        }
     }
 
     func stop() {
         sessionQueue.sync {}
         captureSession.stopRunning()
+    }
+
+    func startBroadcast() {
+        lock.lock()
+        defer { lock.unlock() }
+        sender = UDPSender(hostport: targetServerAddress)
+    }
+
+    func stopBroadcast() {
+        lock.lock()
+        defer { lock.unlock() }
+        sender = nil
     }
 
     func captureOutput(
@@ -124,7 +161,7 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
             NSLog("[DEBUG] found \(markers.count) markers")
         }
 
-        guard let cgImage = drawInfo(sampleBuffer: buffer, markers: markers) else {
+        guard let cgImage = drawMarkers(sampleBuffer: buffer, markers: markers) else {
             return
         }
 
@@ -136,10 +173,33 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
             lastFrameTimestamp = currentTimestamp
             fps = Int(fpsFloat.rounded())
             processedWithinSeconds = pr
+
+            if let sender = sender {
+                let arucos = markers.map { marker in
+                    ArucoPacket(
+                            id: Int(marker.id),
+                            position: FloatTriple(
+                                    x: Float(marker.position.x),
+                                    y: Float(marker.position.y),
+                                    z: Float(marker.position.z)
+                            ),
+                            orientation: FloatTriple(
+                                    x: Float(marker.orientation.x),
+                                    y: Float(marker.orientation.y),
+                                    z: Float(marker.orientation.z)
+                            )
+                    )
+                }
+
+                lock.lock()
+                defer { lock.unlock() }
+
+                sender.send(packet: Packet(arucos: arucos, timeElapsed: processedWithinSeconds, ts: currentTimestamp))
+            }
         }
     }
 
-    private func drawInfo(sampleBuffer: CMSampleBuffer, markers: [ArucoMarker]) -> CGImage? {
+    private func drawMarkers(sampleBuffer: CMSampleBuffer, markers: [ArucoMarker]) -> CGImage? {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else {
             return nil
         }

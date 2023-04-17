@@ -17,6 +17,7 @@
 		C9FFB513D7D128879D55B301 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C9FFBA5081B63463D762E688 /* .gitignore */; };
 		C9FFB52349209C693DC72FE1 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFB6CE4D64A27D3EEF02DC /* SettingsView.swift */; };
 		C9FFBAEF969E669929DF28CE /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFB2E84BDCF419658BCBA8 /* AppState.swift */; };
+		C9FFBAF3475BB466FD46D7F4 /* UDPSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9FFBB9C3ADA34BD55A275F8 /* UDPSender.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		C9FFB6CE4D64A27D3EEF02DC /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C9FFBA5081B63463D762E688 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = file.gitignore; path = .gitignore; sourceTree = "<group>"; };
 		C9FFBB8A8C530FC0FDC58087 /* OpenCVWrapper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = OpenCVWrapper.mm; sourceTree = "<group>"; };
+		C9FFBB9C3ADA34BD55A275F8 /* UDPSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UDPSender.swift; sourceTree = "<group>"; };
 		C9FFBEA99058A427FE4C707B /* OpenCVWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenCVWrapper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,6 +86,7 @@
 				6420D14429ECBAE2005E63ED /* FrameHandler.swift */,
 				C9FFB6CE4D64A27D3EEF02DC /* SettingsView.swift */,
 				C9FFB2E84BDCF419658BCBA8 /* AppState.swift */,
+				C9FFBB9C3ADA34BD55A275F8 /* UDPSender.swift */,
 			);
 			path = arucopublisher;
 			sourceTree = "<group>";
@@ -208,6 +211,7 @@
 				6420D14529ECBAE2005E63ED /* FrameHandler.swift in Sources */,
 				C9FFB52349209C693DC72FE1 /* SettingsView.swift in Sources */,
 				C9FFBAEF969E669929DF28CE /* AppState.swift in Sources */,
+				C9FFBAF3475BB466FD46D7F4 /* UDPSender.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -30,38 +30,50 @@ struct ImageOverlay: View {
     @State var flash = false
     let model: FrameHandler
 
+    @State var broadcast = false
+
     var body: some View {
-        HStack {
+        VStack {
             HStack {
-                Text("\(model.fps) fps")
-                        .font(.system(size: 11))
-                        .foregroundColor(.white)
-                Text("processed within: \(Int((model.processedWithinSeconds * 1000).rounded())) μs")
-                        .font(.system(size: 11))
-                        .foregroundColor(.white)
-                Text("sent within: \(Int((model.sentWithinSeconds * 1000).rounded())) μs")
-                        .font(.system(size: 11))
-                        .foregroundColor(.white)
-            }
-                    .background(Color.black.opacity(0.5)).cornerRadius(5)
+                HStack {
+                    Text("\(model.fps) fps")
+                            .font(.system(size: 11))
+                            .foregroundColor(.white)
+                    Text("processed within: \(Int((model.processedWithinSeconds * 1000).rounded())) μs")
+                            .font(.system(size: 11))
+                            .foregroundColor(.white)
+                }.background(Color.black.opacity(0.5)).cornerRadius(5)
+
+                Spacer()
+
+                HStack {
+                    Text("Flash")
+                            .font(.system(size: 11))
+                            .foregroundColor(.white)
+                    Toggle("", isOn: $flash).onChange(of: flash, perform: { value in
+                        model.toggleFlash(value: value)
+                    })
+                    Button("Settings") {
+                        model.stop()
+                        state.settings = true
+                    }
+                }.background(Color.black.opacity(0.5)).cornerRadius(5)
+            }.padding(10)
 
             Spacer()
 
-            HStack {
-                Text("Flash")
-                        .font(.system(size: 11))
-                        .foregroundColor(.white)
-                Toggle("", isOn: $flash).onChange(of: flash, perform: { value in
-                    model.toggleFlash(value: value)
-                })
-                Button("Settings") {
-                    model.stop()
-                    state.settings = true
+            Button(broadcast ? "Stop broadcasting" : "Start broadcasting") {
+                if !broadcast {
+                    model.startBroadcast()
+                } else {
+                    model.stopBroadcast()
                 }
-            }
-                    .background(Color.black.opacity(0.5)).cornerRadius(5)
+                broadcast.toggle()
+            }.padding(10)
+                    .cornerRadius(5)
+                    .background(broadcast ? Color.red : Color.green )
+                    .foregroundColor(.white)
         }
-                .padding(10)
     }
 }
 
