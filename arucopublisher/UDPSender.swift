@@ -16,7 +16,26 @@ class UDPSender {
         self.port = NWEndpoint.Port(String(parts[1]))!
 
         NSLog("[DEBUG] starting broadcaster to host: \(host), port: \(port)")
-        self.connection = NWConnection(host: host, port: port, using: .udp)
+        connection = NWConnection(host: host, port: port, using: .udp)
+        connection.stateUpdateHandler = { newState in
+            switch (newState) {
+            case .ready:
+                NSLog("[DEBUG] connection state: ready")
+            case .setup:
+                NSLog("[DEBUG] connection state: setup")
+            case .cancelled:
+                NSLog("[DEBUG] connection state: canceled")
+            case .preparing:
+                NSLog("[DEBUG] connection state: preparing")
+            default:
+                NSLog("[ERROR] connection state is not defined")
+            }
+        }
+        connection.start(queue: .global())
+    }
+
+    deinit {
+        connection.cancel()
     }
 
     func start() {
@@ -26,6 +45,7 @@ class UDPSender {
     func send(packet: Packet) {
         let bytes = packet.toBytes()
         connection.send(content: bytes, completion: .contentProcessed({ error in
+            NSLog("[DEBUG] sent completed")
             if let error = error {
                 NSLog("[ERROR] sending packet: \(error)")
             }
