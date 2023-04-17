@@ -175,6 +175,9 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
             processedWithinSeconds = pr
 
             if let sender = sender {
+                if markers.count == 0 {
+                    return
+                }
                 let arucos = markers.map { marker in
                     ArucoPacket(
                             id: Int(marker.id),
