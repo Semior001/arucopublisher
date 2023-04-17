@@ -35,28 +35,11 @@ struct Triple {
 };
 
 static Pair<std::vector<std::vector<cv::Point2f>>, std::vector<int>> detect(int width, int height, CVPixelBufferRef pixelBuffer) {
-    NSLog(@"[DEBUG] detecting markers, width: %d, height: %d", width, height);
-
     cv::Ptr<cv::aruco::Dictionary> dictionary = cv::aruco::getPredefinedDictionary(cv::aruco::DICT_4X4_50);
 
     CVPixelBufferLockBaseAddress(pixelBuffer, 0);
     void *baseaddress = CVPixelBufferGetBaseAddressOfPlane(pixelBuffer, 0);
     cv::Mat image(height, width, CV_8UC1, baseaddress, CVPixelBufferGetBytesPerRowOfPlane(pixelBuffer, 0));
-
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString *documentsDirectoryPath = [paths firstObject];
-//    NSString *outputImagePath = [documentsDirectoryPath stringByAppendingPathComponent:@"output.png"];
-//
-//    bool success = false;
-//
-//    @try {
-//        success = cv::imwrite([outputImagePath UTF8String], image);
-//    }
-//    @catch (NSException *exception) {
-//        NSLog(@"[ERROR] exception: %@", exception);
-//    }
-//
-//    NSLog(@"[DEBUG] saved image to: %@, success: %d", outputImagePath, success);
 
     std::vector<int> ids;
     std::vector<std::vector<cv::Point2f>> corners;
@@ -91,7 +74,6 @@ static Triple<std::vector<cv::Vec3d>, std::vector<cv::Vec3d>, std::vector<std::v
     std::vector<cv::Vec3d> rvecs, tvecs;
 
     cv::aruco::estimatePoseSingleMarkers(corners, static_cast<float>(markerSize), intrinMat, distCoeffs, rvecs, tvecs);
-    NSLog(@"[DEBUG] found: rvecs.size(): %lu", rvecs.size());
 
     // project points
     std::vector<std::vector<cv::Point2f>> imagePoints;

@@ -9,11 +9,17 @@ import AVFoundation
 import CoreImage
 
 class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBufferDelegate {
-    @Published var frame: CGImage?
     private var permissionGranted = false
     private let captureSession = AVCaptureSession()
     private let sessionQueue = DispatchQueue(label: "sessionQueue")
     private let context = CIContext()
+
+    // guarded
+    @Published var frame: CGImage?
+    @Published var fps: Int = 0
+    @Published var processedWithinSeconds: Double = 0
+    @Published var sentWithinSeconds: Double = 0
+    private var lastFrameTimestamp: Double = 0
 
     override init() {
         super.init()
@@ -24,8 +30,21 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
         }
     }
 
+    func toggleFlash(value: Bool) {
+        guard let device = AVCaptureDevice.default(.builtInDualWideCamera,for: .video, position: .back) else { return }
+        guard device.hasTorch else { return }
+        guard device.isTorchModeSupported(.on) else { return }
+
+        do {
+            try device.lockForConfiguration()
+            device.torchMode = value ? .on : .off
+            device.unlockForConfiguration()
+        } catch {
+            print("Torch could not be used")
+        }
+    }
+
     func checkPermissions() {
-        // video permissions
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
             permissionGranted = true
@@ -55,8 +74,7 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
 
         // turn on camera intrinsics matrix delivery
         videoOutput.connection(with: .video)?.isCameraIntrinsicMatrixDeliveryEnabled = true
-
-        videoOutput.connection(with: .video)?.videoOrientation = .portrait
+        videoOutput.connection(with: .video)?.videoOrientation = .landscapeRight
     }
 
     func captureOutput(
@@ -71,21 +89,34 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
             from: (captureSession.inputs.first as! AVCaptureDeviceInput).device
         )
 
-        let markers = OpenCVWrapper.detectAndLocalize(
-            imageBuffer,
-            withIntrinsics: cameraStats.intrinsics,
-            markerSize: cameraStats.markerSize
-        )
+        var markers: [ArucoMarker] = []
 
+        let pr = measureSeconds {
+            markers = OpenCVWrapper.detectAndLocalize(
+                    imageBuffer,
+                    withIntrinsics: cameraStats.intrinsics,
+                    markerSize: cameraStats.markerSize
+            ) as! [ArucoMarker]
+        }
 
-        guard let cgImage = drawMarkers(sampleBuffer: buffer, markers: markers as! [ArucoMarker]) else { return }
+        if markers.count > 0 {
+            NSLog("[DEBUG] found \(markers.count) markers")
+        }
+
+        guard let cgImage = drawInfo(sampleBuffer: buffer, markers: markers) else { return }
 
         DispatchQueue.main.async { [unowned self] in
             frame = cgImage
+
+            let currentTimestamp = CMSampleBufferGetPresentationTimeStamp(buffer).seconds
+            let fpsFloat = 1 / (currentTimestamp - lastFrameTimestamp)
+            lastFrameTimestamp = currentTimestamp
+            fps = Int(fpsFloat.rounded())
+            processedWithinSeconds = pr
         }
     }
 
-    private func drawMarkers(sampleBuffer: CMSampleBuffer, markers: [ArucoMarker]) -> CGImage? {
+    private func drawInfo(sampleBuffer: CMSampleBuffer, markers: [ArucoMarker]) -> CGImage? {
         guard let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer) else { return nil }
         let ciImage = CIImage(cvPixelBuffer: pixelBuffer)
 
@@ -137,13 +168,18 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
             }
         }
 
-        NSLog("[DEBUG] intrinsics: \(intrinsics)")
-
         return (
                 intrinsics,
                 distortionCoefficients,
                 markerSize
         )
     }
+}
+
+func measureSeconds(_ block: () -> Void) -> Double {
+    let start = CFAbsoluteTimeGetCurrent()
+    block()
+    let end = CFAbsoluteTimeGetCurrent()
+    return end - start
 }
 
