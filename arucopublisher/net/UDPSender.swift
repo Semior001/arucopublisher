@@ -10,8 +10,8 @@ class UDPSender {
     var host: NWEndpoint.Host
     var port: NWEndpoint.Port
 
-    init(hostport: String) {
-        let parts = hostport.split(separator: ":")
+    init(hostPort: String) {
+        let parts = hostPort.split(separator: ":")
         self.host = NWEndpoint.Host(String(parts[0]))
         self.port = NWEndpoint.Port(String(parts[1]))!
 

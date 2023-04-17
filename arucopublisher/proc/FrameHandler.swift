@@ -124,7 +124,7 @@ class FrameHandler: NSObject, ObservableObject, AVCaptureVideoDataOutputSampleBu
     func startBroadcast() {
         lock.lock()
         defer { lock.unlock() }
-        sender = UDPSender(hostport: targetServerAddress)
+        sender = UDPSender(hostPort: targetServerAddress)
     }
 
     func stopBroadcast() {
